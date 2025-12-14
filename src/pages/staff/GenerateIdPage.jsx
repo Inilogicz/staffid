@@ -20,26 +20,29 @@ const CardSkeleton = () => (
 const CardFront = React.forwardRef(({ staff }, ref) => (
   <div 
     ref={ref} 
-    className="w-full h-full rounded-xl bg-white text-slate-800 flex flex-col overflow-hidden relative border border-blue-500"
+    className="w-full h-full rounded-xl bg-white text-slate-800 flex flex-col overflow-hidden relative border-2 border-blue-500"
     style={{backgroundImage: "url('/assets/card-bg.svg')", backgroundSize: 'cover'}}
   >
     {/* Header Section */}
-    <div className="text-center pt-3 px-3">
-      <img src="/assets/dclm.png" alt="Logo" className="h-8 mx-auto object-contain" />
-      <p className="text-[0.6rem] text-slate-500 font-bold tracking-widest mt-1 uppercase">Staff Identification Card</p>
+    <div className="text-center pt-4 pb-2 px-4">
+      <img src="/assets/dclm.png" alt="Logo" className="h-12 mx-auto object-contain" />
+      <p className="text-[0.7rem] text-slate-500 font-bold tracking-widest mt-1 uppercase">Staff Identification Card</p>
     </div>
     
+    {/* Red Line Separator */}
+    <div className="w-full h-1.5 bg-red-500"></div>
+    
     {/* Main Content */}
-    <div className="flex-1 flex items-center gap-3 px-4 mt-1">
-      <div className="w-20 h-24 bg-slate-200 rounded-md flex-shrink-0 shadow-sm border-2 border-white overflow-hidden">
+    <div className="flex-1 flex items-center gap-4 px-5 py-2">
+      <div className="w-24 h-28 bg-slate-200 rounded-md flex-shrink-0 shadow-md border-2 border-white overflow-hidden">
         <img src={getImageUrl(staff?.passportPhotoUrl) || '/assets/hero.jpg'} alt="Staff" className="w-full h-full object-cover" />
       </div>
       <div className="min-w-0 flex-1">
         <p className="text-lg font-bold text-slate-900 leading-tight truncate">{staff?.name || 'Jane Doe'}</p>
-        <p className="text-xs font-bold text-blue-700 truncate mt-0.5">{staff?.designation || 'Senior Developer'}</p>
-        <div className="mt-1.5 space-y-0.5">
-            <p className='text-[0.6rem] font-semibold text-slate-600 truncate uppercase'>Dept: {staff?.department || 'Engineering'}</p>
-            <p className="text-[0.6rem] font-semibold text-slate-600">ID: {staff?._id ? staff._id.slice(-6).toUpperCase() : 'EMP001'} </p>
+        <p className="text-xs font-bold text-blue-700 truncate mt-1 uppercase">{staff?.designation || 'Senior Developer'}</p>
+        <div className="mt-2 space-y-1">
+            <p className='text-[0.65rem] font-bold text-slate-500 truncate uppercase'>Dept: {staff?.department || 'Engineering'}</p>
+            <p className="text-[0.65rem] font-bold text-slate-500">ID: {staff?._id ? staff._id.slice(-6).toUpperCase() : 'EMP001'} </p>
         </div>
       </div>
     </div>
@@ -53,24 +56,24 @@ CardFront.displayName = 'CardFront';
 const CardBack = React.forwardRef(({ staff }, ref) => (
   <div 
     ref={ref} 
-    className="w-full h-full rounded-xl bg-white p-3 flex flex-col justify-between border border-blue-500"
+    className="w-full h-full rounded-xl bg-white p-4 flex flex-col justify-between border-2 border-blue-500"
   >
-    <div className="text-center pt-1">
-      <h3 className="text-[0.6rem] font-bold text-slate-600 uppercase tracking-wide">Property of Deeper Christian Life Ministry</h3>
-      <div className="w-12 h-0.5 bg-blue-600 mx-auto mt-1"></div>
+    <div className="text-center pt-2">
+      <h3 className="text-[0.7rem] font-bold text-slate-600 uppercase tracking-wide">Property of Deeper Christian Life Ministry</h3>
+      <div className="w-16 h-0.5 bg-blue-600 mx-auto mt-1"></div>
     </div>
     
     <div className="flex-1 flex flex-col items-center justify-center py-1">
         {staff?.qrCode && (
             <div className="p-1 bg-white rounded border border-slate-200">
-                <img src={staff.qrCode} alt="QR Code" className="w-20 h-20" />
+                <img src={staff.qrCode} alt="QR Code" className="w-24 h-24" />
             </div>
         )}
-        <p className="text-[0.55rem] text-slate-400 mt-1">Scan to Verify</p>
+        <p className="text-[0.65rem] text-slate-400 mt-1 font-medium">Scan to Verify</p>
     </div>
 
-    <div className="text-center px-2 pb-1">
-      <p className="text-[0.5rem] leading-tight text-slate-500 font-medium">
+    <div className="text-center px-2 pb-2">
+      <p className="text-[0.6rem] leading-tight text-slate-500 font-medium">
         If found, please return to the nearest Police Station or contact DCLM Headquarters, Gbagada, Lagos.
       </p>
     </div>
