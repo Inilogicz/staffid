@@ -21,9 +21,11 @@ const Header = ({ setSidebarOpen }) => {
           <Menu className="h-5 w-5" />
           <span className="sr-only">Toggle navigation menu</span>
         </Button>
-        <h1 className="hidden md:block text-xl font-semibold">
-          DCLM Staff ID Management
-        </h1>
+        {/* <h1 className="hidden md:block text-xl font-semibold">
+          DEEPER CHRISTIAN LIFE MINISTRY STAFF ID SYSTEM 
+        </h1> */}
+        <img src="/assets/dclm.png" alt="" 
+        width={350} height={350} className="hidden md:block" />
       </div>
       
       {/* Right side: Header Actions */}

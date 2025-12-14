@@ -14,9 +14,12 @@ import StaffDetailPage from './pages/staff/StaffDetailPage';
 import UpdateStaffPage from './pages/staff/UpdateStaffPage';
 import NotFoundPage from './pages/NotFoundPage';
 import GenerateIdPage from './pages/staff/GenerateIdPage';
+import HistoryPage from './pages/history/HistoryPage';
+import AddStaffPage from './pages/staff/AddStaffPage';
+
 
 // Import the ProtectedRoute component
-// import ProtectedRoute from './components/shared/ProtectedRoute';
+import ProtectedRoute from './components/shared/ProtectedRoute';
 
 function App() {
   return (
@@ -30,14 +33,16 @@ function App() {
 
         {/* --- Protected Routes --- */}
         {/* The ProtectedRoute component acts as a gatekeeper */}
-        <Route >
+        <Route element={<ProtectedRoute />}>
           {/* All routes inside MainLayout share the sidebar/header and are protected */}
           <Route element={<MainLayout />}>
             <Route path="/" element={<DashboardPage />} />
             <Route path="/staff" element={<StaffListPage />} />
             <Route path="/staff/:id" element={<StaffDetailPage />} />
+             <Route path="/staff/new" element={<AddStaffPage />} />
              <Route path="/staff/update/:id" element={<UpdateStaffPage />} />
             <Route path="/generate-id/:id" element={<GenerateIdPage />} />
+            <Route path="/history" element={<HistoryPage />} />
             {/* <Route path="/history" element={<HistoryPage />} /> */}
           </Route>
         </Route>

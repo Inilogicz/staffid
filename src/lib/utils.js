@@ -1,4 +1,3 @@
-// src/lib/utils.js
 import { clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 
@@ -6,26 +5,34 @@ export function cn(...inputs) {
   return twMerge(clsx(inputs))
 }
 
-// --- ADD THIS NEW FUNCTION ---
-export function convertGoogleDriveUrl(url) {
-  if (!url || !url.includes('drive.google.com')) {
-    // If it's not a google drive link, return it as is or a default placeholder
-    return url || '/assets/hero.jpg'; // Default placeholder image
+/**
+ * Creates fallback initials from a full name.
+ * e.g., "John Smith" -> "JS"
+ */
+export const getInitials = (name = '') => {
+  if (!name) return '??';
+  const names = name.split(' ');
+  if (names.length === 1) return names[0].charAt(0).toUpperCase();
+  return (names[0].charAt(0) + names[names.length - 1].charAt(0)).toUpperCase();
+};
+
+/**
+ * Returns a usable image URL.
+ * - If it's a Cloudinary URL, it's used directly.
+ * - If it's a Google Drive URL, it creates a proxy link.
+ * - Otherwise, it returns null.
+ */
+export const getImageUrl = (url) => {
+  if (!url) return null;
+  
+  if (url.includes('cloudinary')) {
+    return url;
   }
   
-  try {
-    const urlObject = new URL(url);
-    const fileId = urlObject.searchParams.get('id');
-    
-    if (!fileId) {
-      return '/assets/hero.jpg'; // Return placeholder if ID is not found
-    }
-    
-    // Return the direct content link format
-    return `https://drive.google.com/uc?id=${fileId}`;
-    
-  } catch (error) {
-    console.error("Invalid URL for conversion:", url);
-    return '/assets/hero.jpg'; // Fallback on any error
+  if (url.includes('drive.google.com')) {
+    const baseUrl = import.meta.env.VITE_API_BASE_URL;
+    return `${baseUrl}/api/image/proxy?url=${encodeURIComponent(url)}`;
   }
-}
+  
+  return null;
+};

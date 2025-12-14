@@ -45,7 +45,7 @@ const LoginPage = () => {
       <CardHeader className="text-center"> {/* <-- Centered the header text */}
         {/* You can replace this with your actual logo */}
         <div className="flex justify-center mb-4">
-          <img src="/assets/church_logo-1.png" alt="DCLM Logo" className="h-16 w-16" />
+          <img src="/assets/dclm.png" alt="DCLM Logo" width={350} height={350}  />
         </div>
         <CardTitle className="text-2xl font-bold">Welcome Back</CardTitle>
         <CardDescription>

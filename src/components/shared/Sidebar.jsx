@@ -20,7 +20,7 @@ const navLinks = [
   { to: '/staff', label: 'All Staff', icon: Users },
 //   { to: '/staff', label: 'Generate ID', icon: FilePlus },
   { to: '/history', label: 'History', icon: History },
-  { to: '/printing/queue', label: 'Print Queue', icon: Printer },
+  // { to: '/printing/queue', label: 'Print Queue', icon: Printer },
 ];
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
@@ -43,7 +43,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
     <div className="flex flex-col h-full">
       <div className="flex items-center justify-between p-6 border-b border-gray-800">
         <div className="flex items-center gap-4">
-          <img src="/assets/church_logo-1.png" alt="Logo" className="h-10 w-10" />
+          {/* <img src="/assets/church_logo-1.png" alt="Logo" className="h-10 w-10" /> */}
           <span className="text-lg font-semibold">DCLM ID System</span>
         </div>
         <Button variant="ghost" size="icon" className="lg:hidden text-gray-400 hover:text-white" onClick={() => setSidebarOpen(false)}>
