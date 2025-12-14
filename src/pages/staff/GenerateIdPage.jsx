@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Printer, ArrowLeft, Download, CheckSquare, Loader2 } from 'lucide-react';
 import { getImageUrl } from '@/lib/utils'; 
-import { AlertDialog, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger, AlertDialogCancel } from "@/components/ui/alert-dialog";
 import { toPng } from 'html-to-image';
 
 // Skeleton Loader that matches the final layout
@@ -78,6 +77,47 @@ const CardBack = React.forwardRef(({ staff }, ref) => (
 ));
 CardBack.displayName = 'CardBack';
 
+const printStyles = `
+  @media print {
+    @page {
+      size: 85.60mm 53.98mm;
+      margin: 0;
+    }
+    body {
+      visibility: hidden;
+      background-color: white;
+    }
+    #print-section {
+      visibility: visible;
+      display: block !important;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+    }
+    .print-card {
+      visibility: visible;
+      position: relative;
+      width: 85.60mm;
+      height: 53.98mm;
+      page-break-after: always;
+      break-after: page;
+      overflow: hidden;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .print-card:last-child {
+      page-break-after: avoid;
+      break-after: avoid;
+    }
+    .print-card > div {
+        width: 100% !important;
+        height: 100% !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+    }
+  }
+`;
 
 const GenerateIdPage = () => {
   const { id } = useParams();
@@ -135,12 +175,17 @@ const GenerateIdPage = () => {
     }
   };
 
+  const handlePrint = () => {
+    window.print();
+  };
+
   if (loading) return <div className="p-4 md:p-8"><CardSkeleton /></div>;
   if (error) return <div className="p-4 md:p-8 text-center text-red-500">{error}</div>;
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <style>{printStyles}</style>
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 print:hidden">
         <div>
           <h1 className="text-3xl font-bold">ID Card Preview</h1>
           <p className="text-muted-foreground">Review the ID card below before printing or downloading.</p>
@@ -154,30 +199,27 @@ const GenerateIdPage = () => {
             ) : (
                 <Button variant="outline" onClick={() => navigate(`/staff/${id}`)}><ArrowLeft className="mr-2 h-4 w-4" /> Back to Details</Button>
             )}
-            <AlertDialog>
-                <AlertDialogTrigger asChild><Button><Printer className="mr-2 h-4 w-4" /> Print</Button></AlertDialogTrigger>
-                <AlertDialogContent>
-                    <AlertDialogHeader>
-                        <AlertDialogTitle>Printer Functionality</AlertDialogTitle>
-                        <AlertDialogDescription>
-                            Direct printing is currently under construction. This feature will be available once printer SDKs are integrated.
-                        </AlertDialogDescription>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter>
-                        <AlertDialogCancel>Close</AlertDialogCancel>
-                    </AlertDialogFooter>
-                </AlertDialogContent>
-            </AlertDialog>
+            <Button onClick={handlePrint}><Printer className="mr-2 h-4 w-4" /> Print</Button>
         </div>
       </div>
       
       {/* ======================= ID Card Preview Section (Always Visible) ======================= */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 print:hidden">
         <div className="relative w-full max-w-md mx-auto aspect-[1.586/1]">
           <CardFront staff={staff} ref={frontRef} />
         </div>
         <div className="relative w-full max-w-md mx-auto aspect-[1.586/1]">
           <CardBack staff={staff} ref={backRef} />
+        </div>
+      </div>
+      
+      {/* ======================= Print Section (Hidden on Screen) ======================= */}
+      <div id="print-section" className="hidden">
+        <div className="print-card">
+            <CardFront staff={staff} />
+        </div>
+        <div className="print-card">
+            <CardBack staff={staff} />
         </div>
       </div>
       
