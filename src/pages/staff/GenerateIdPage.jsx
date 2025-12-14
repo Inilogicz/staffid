@@ -34,13 +34,13 @@ const ProfessionalCardFront = React.forwardRef(({ staff }, ref) => {
         <img 
             src="/assets/dclm_logo.png" 
             alt="" 
-            className="w-48 opacity-[0.06] grayscale" 
+            className="w-48 opacity-[0.13] ml-34" 
         />
       </div>
 
       {/* Top Banner (Deep Blue) */}
       <div className="w-full h-1/6  flex items-center justify-between px-4 py-1 relative z-10">
-        <img src="/assets/dclm.png" alt="Logo" className="h-10 w-auto object-contain  " />
+        <img src="/assets/dclm.png" alt="Logo" className="h-11.5 w-auto object-contain  pt-1 " />
         <p className="text-[0.65rem] font-medium tracking-widest uppercase">STAFF ID CARD</p>
       </div>
       
@@ -69,25 +69,25 @@ const ProfessionalCardFront = React.forwardRef(({ staff }, ref) => {
             {/* Secondary Details (2-column layout) */}
             <div className="grid grid-cols-2 gap-y-2 gap-x-2 text-left">
                 <div>
-                    <p className="text-[0.6rem] font-medium text-slate-400 uppercase">Department</p>
-                    <p className="text-xs font-bold text-slate-700 truncate">{staff?.department || 'Engineering'}</p>
+                    <p className="text-[0.7rem] font-medium text-slate-800 uppercase">Department</p>
+                    <p className="text-sm font-bold text-slate-700 truncate">{staff?.department || 'Engineering'}</p>
                 </div>
                 <div>
-                    <p className="text-[0.6rem] font-medium text-slate-400 uppercase">Staff ID</p>
-                    <p className="text-xs font-bold text-red-500 truncate">{staff?._id ? staff._id.slice(-6).toUpperCase() : 'EMP001'}</p>
+                    <p className="text-[0.7rem] font-medium text-slate-800 uppercase">Staff ID</p>
+                    <p className="text-sm font-bold text-red-500 truncate">{staff?._id ? staff._id.slice(-6).toUpperCase() : 'EMP001'}</p>
                 </div>
               
             
             
         </div>
-         <div className="grid grid-cols-2 gap-y-2 gap-x-2 text-left">
+         <div className="grid grid-cols-2 gap-y-2 gap-x-2 text-left mt-3">
                 <div>
-                    <p className="text-[0.6rem] font-medium text-slate-400 uppercase">Staff Category</p>
-                    <p className="text-xs font-bold text-slate-700 truncate">{staff?.staffCategory || 'Engineering'}</p>
+                    <p className="text-[0.7rem] font-medium text-slate-800 uppercase">Staff Category</p>
+                    <p className="text-sm font-bold text-slate-700 truncate">{staff?.staffCategory || 'Engineering'}</p>
                 </div>
                 <div>
-                    <p className="text-[0.6rem] font-medium text-slate-400 uppercase">Sex</p>
-                    <p className="text-xs font-bold text-slate-800 truncate">{staff?.sex}</p>
+                    <p className="text-[0.7rem] font-medium text-slate-800 uppercase">Sex</p>
+                    <p className="text-sm font-bold text-slate-800 truncate">{staff?.sex}</p>
                 </div>
               </div>
                <div className=" border-l-4 border-red-500 pl-2 mt-2">
@@ -181,6 +181,7 @@ const printStyles = `
     .print-card:last-child {
       page-break-after: avoid;
       break-after: avoid;
+      transform: rotate(180deg);
     }
     .print-card > div {
         /* Scale content to fit the print dimensions (Standard 0.647 scale for 500px base) */
@@ -189,7 +190,7 @@ const printStyles = `
         transform: scale(0.647) !important;
         transform-origin: top left !important;
         box-shadow: none !important;
-        border-radius: 10 !important;
+        border-radius: 0 !important;
     }
   }
 `;
