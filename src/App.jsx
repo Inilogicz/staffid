@@ -8,7 +8,7 @@ import AuthLayout from './layouts/AuthLayout';
 
 // Import Pages
 import DashboardPage from './pages/dashboard/Dashboard';
-import LoginPage from './pages/auth/Login'; 
+import LoginPage from './pages/auth/login'; 
 import StaffListPage from './pages/staff/StaffListPage'; 
 import StaffDetailPage from './pages/staff/StaffDetailPage';
 import UpdateStaffPage from './pages/staff/UpdateStaffPage';
