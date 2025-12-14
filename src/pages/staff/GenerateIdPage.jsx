@@ -90,6 +90,8 @@ const printStyles = `
     body {
       visibility: hidden;
       background-color: white;
+      margin: 0;
+      padding: 0;
     }
     #print-section {
       visibility: visible;
@@ -113,12 +115,16 @@ const printStyles = `
     .print-card:last-child {
       page-break-after: avoid;
       break-after: avoid;
+      transform: rotate(180deg);
     }
     .print-card > div {
-        width: 100% !important;
-        height: 100% !important;
+        /* Scale content to fit the print dimensions */
+        width: 500px !important;
+        height: 315.25px !important; /* Aspect ratio 1.586 */
+        transform: scale(0.647) !important; /* 85.6mm / 500px */
+        transform-origin: top left !important;
         box-shadow: none !important;
-        border-radius: 0 !important;
+        border-radius: 10 !important;
     }
   }
 `;
